@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Carrinho de Compras
+{% endblock %}
+
+{% block main %}
+    <div class="main-content" style="max-width: 1100px; margin: 0 auto; padding: 2rem 1rem;">
+        <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #212529;">Seu Carrinho de Compras</h1>
+        <p style="color: #6c757d; margin-bottom: 2.5rem;">Revise os itens selecionados antes de prosseguir para o checkout.</p>
+
+        {% if cart %}
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+
+                <!-- Coluna da Esquerda: Lista de Produtos Compactos -->
+                <div style="flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 1rem;">
+                    {% set ns = namespace(subtotal=0) %}
+                    {% for item in cart %}
+                        {% set ns.subtotal = ns.subtotal + (item.price * item.quantity) %}
+                        <div style="display: flex; align-items: center; background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.01);">
+
+                            <!-- Link envolvendo a imagem, nome e informações para tornar clicável -->
+                            <a href="/product?id={{ item.product_id }}" style="display: flex; align-items: center; flex-grow: 1; text-decoration: none; color: inherit;">
+                                <!-- Imagem menor -->
+                                <img src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 6px; margin-right: 1rem;">
+
+                                <!-- Informações -->
+                                <div style="flex-grow: 1;">
+                                    <h5 style="font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem 0; color: #212529;">{{ item.name }}</h5>
+                                    <p style="margin: 0; font-size: 0.9rem; color: #6c757d;">Quantidade: <strong>{{ item.quantity }}</strong></p>
+                                    <p style="margin: 0.25rem 0 0 0; font-size: 0.95rem; font-weight: 700; color: #212529;">R$ {{ "%.2f"|format(item.price * item.quantity) }}</p>
+                                </div>
+                            </a>
+
+                            <!-- Botão de Remover Compacto (mantido fora do link para evitar conflito de cliques) -->
+                            <form action="/remove_from_cart" method="post" style="margin: 0; margin-left: 1rem;">
+                                <input type="hidden" name="cart_id" value="{{ item.id }}">
+                                <button type="submit" style="background: none; border: none; color: #dc3545; font-size: 0.85rem; font-weight: 500; cursor: pointer; padding: 0.25rem 0.50rem;">Remover</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Coluna da Direita: Sumário / Resumo da Compra -->
+                <div style="flex: 1; min-width: 260px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <h3 style="font-size: 1.25rem; font-weight: 600; margin-top: 0; margin-bottom: 1.25rem; color: #212529; border-bottom: 1px solid #dee2e6; padding-bottom: 0.75rem;">Resumo do Pedido</h3>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.95rem; color: #495057;">
+                        <span>Subtotal</span>
+                        <span>R$ {{ "%.2f"|format(ns.subtotal) }}</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; font-size: 0.95rem; color: #495057;">
+                        <span>Frete</span>
+                        <span style="color: #198754; font-weight: 500;">Grátis</span>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid #dee2e6; margin: 1rem 0;">
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 1.15rem; font-weight: 700; color: #212529;">
+                        <span>Total</span>
+                        <span>R$ {{ "%.2f"|format(ns.subtotal) }}</span>
+                    </div>
+
+                    <!-- Botão de Finalizar Compra -->
+                    <a href="/checkout" class="btn btn-primary" style="display: block; width: 100%; text-align: center; padding: 0.75rem; font-weight: 600; border-radius: 6px; text-decoration: none; box-sizing: border-box;">Finalizar Compra</a>
+                </div>
+
+            </div>
+        {% else %}
+            <div style="text-align: center; margin-top: 4rem;">
+                <p style="font-size: 1.2rem; color: #6c757d;">Seu carrinho está vazio no momento.</p>
+                <a href="/products" class="btn btn-primary" style="display: inline-block; max-width: 200px; margin: 0 auto; text-decoration: none;">Ver Produtos</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

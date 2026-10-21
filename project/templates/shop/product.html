@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block main %}
+    <div class="main-content">
+        <div class="product-detail">
+            <!-- Imagem do produto com Lente e Container de Zoom -->
+            <div class="product-image" id="zoom-container">
+                <img id="product-img" src="{{ url_for('static', filename='images/' ~ product.image) }}" alt="{{ product.name }}">
+                <div id="zoom-lens" class="zoom-lens"></div>
+                <div id="zoom-result" class="zoom-result"></div>
+            </div>
+
+            <!-- Informações detalhadas do produto -->
+            <div class="product-info">
+                <h1>{{ product.name }}</h1>
+                <p class="description">{{ product.description }}</p>
+                <h3 class="price">R$ {{ product.price }}</h3>
+
+                <!-- Exibição do estoque disponível -->
+                <p style="margin: 1rem 0; font-size: 0.95rem; color: #495057;">
+                    Estoque disponível: <strong>{{ product.stock }} unidades</strong>
+                </p>
+
+                <!-- Container alinhando todos os elementos lado a lado -->
+                <div class="product-actions" style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 1.5rem;">
+                    <a href="/products" class="btn btn-secondary" style="margin: 0; white-space: nowrap;">Voltar aos produtos</a>
+
+                    <form action="/add_to_cart" method="post" style="display: flex; gap: 0.5rem; align-items: center; margin: 0;">
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                        <!-- Input de Quantidade Compacto -->
+                        <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" style="width: 65px; height: 38px; padding: 0.3rem; border: 1px solid #ced4da; border-radius: 6px; text-align: center; font-size: 1rem; box-sizing: border-box;">
+
+                        <button type="submit" class="btn btn-primary" style="border: none; cursor: pointer; height: 38px; display: flex; align-items: center; justify-content: center; white-space: nowrap;">Adicionar ao Carrinho</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/zoom.js') }}"></script>
+{% endblock %}

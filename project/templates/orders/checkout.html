@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Finalizar Pedido
+{% endblock %}
+
+{% block main %}
+    <div class="main-content" style="max-width: 1100px; margin: 0 auto; padding: 2rem 1rem;">
+        <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #212529;">Finalizar Pedido</h1>
+        <p style="color: #6c757d; margin-bottom: 2.5rem;">Preencha seus dados de entrega para concluir a compra.</p>
+
+        {% if cart %}
+            <form action="/checkout" method="post">
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+
+                    <!-- Coluna da Esquerda: Formulário de Endereço / Dados -->
+                    <div style="flex: 2; min-width: 300px; background: #fff; border: 1px solid #e9ecef; border-radius: 10px; padding: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.01);">
+                        <h3 style="font-size: 1.25rem; font-weight: 600; margin-top: 0; margin-bottom: 1.5rem; color: #212529; border-bottom: 1px solid #dee2e6; padding-bottom: 0.75rem;">Endereço de Entrega</h3>
+
+                        <div style="margin-bottom: 1.25rem;">
+                            <label for="address" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: #495057;">Endereço Completo (Rua, Número, Bairro)</label>
+                            <input type="text" id="address" name="address" required placeholder="Ex: Av. Paulista, 1000 - Bela Vista" style="width: 100%; padding: 0.75rem; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box;">
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1.25rem;">
+                            <div style="flex: 2;">
+                                <label for="city" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: #495057;">Cidade</label>
+                                <input type="text" id="city" name="city" required placeholder="Ex: São Paulo" style="width: 100%; padding: 0.75rem; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="cep" style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: #495057;">CEP</label>
+                                <input type="text" id="cep" name="cep" required placeholder="00000-000" style="width: 100%; padding: 0.75rem; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box;">
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #212529; border-bottom: 1px solid #dee2e6; padding-bottom: 0.75rem;">Pagamento</h3>
+                            <p style="color: #6c757d; font-size: 0.95rem;">Pagamento simulado com sucesso (Ambiente de Testes).</p>
+                        </div>
+                    </div>
+
+                    <!-- Coluna da Direita: Resumo do Pedido -->
+                    <div style="flex: 1; min-width: 260px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                        <h3 style="font-size: 1.25rem; font-weight: 600; margin-top: 0; margin-bottom: 1.25rem; color: #212529; border-bottom: 1px solid #dee2e6; padding-bottom: 0.75rem;">Resumo dos Itens</h3>
+
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; max-height: 200px; overflow-y: auto;">
+                            {% for item in cart %}
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #495057;">
+                                    <span>{{ item.quantity }}x {{ item.name }}</span>
+                                    <strong>R$ {{ "%.2f"|format(item.price * item.quantity) }}</strong>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid #dee2e6; margin: 1rem 0;">
+
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; font-size: 0.95rem; color: #495057;">
+                            <span>Subtotal</span>
+                            <span>R$ {{ "%.2f"|format(subtotal) }}</span>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; font-size: 0.95rem; color: #495057;">
+                            <span>Frete</span>
+                            <span style="color: #198754; font-weight: 500;">Grátis</span>
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid #dee2e6; margin: 1rem 0;">
+
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 1.15rem; font-weight: 700; color: #212529;">
+                            <span>Total</span>
+                            <span>R$ {{ "%.2f"|format(subtotal) }}</span>
+                        </div>
+
+                        <!-- Botão de Confirmar Compra -->
+                        <button type="submit" class="btn btn-primary" style="display: block; width: 100%; text-align: center; padding: 0.75rem; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; box-sizing: border-box;">Confirmar Pedido</button>
+                    </div>
+
+                </div>
+            </form>
+        {% else %}
+            <div style="text-align: center; margin-top: 4rem;">
+                <p style="font-size: 1.2rem; color: #6c757d;">Seu carrinho está vazio. Adicione itens antes de finalizar a compra.</p>
+                <a href="/products" class="btn btn-primary" style="display: inline-block; max-width: 200px; margin: 0 auto; text-decoration: none;">Ver Produtos</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

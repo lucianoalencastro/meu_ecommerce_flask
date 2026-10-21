@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <!-- Bootstrap 5.3 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+              crossorigin="anonymous">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYjWnR..."
+                crossorigin="anonymous"></script>
+
+        <!-- CSS próprio -->
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+        <title>Volt: {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+
+        <nav class="bg-light border navbar navbar-expand-md navbar-light">
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/">
+                    <img src="{{ url_for('static', filename='images/VOLT_logo_black.png') }}" alt="Volt" style="height: 35px; width: auto;">
+                </a>
+
+                <button aria-controls="navbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                        class="navbar-toggler"
+                        data-bs-target="#navbar"
+                        data-bs-toggle="collapse"
+                        type="button">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+
+                    {% if session.get("user_id") %}
+
+                        <ul class="navbar-nav me-auto mt-2">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/products">Produtos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/orders">Pedidos</a>
+                            </li>
+
+                        </ul>
+
+                        <ul class="navbar-nav ms-auto mt-2 align-items-center">
+
+                            <li class="nav-item me-3">
+                                <a class="nav-link d-flex align-items-center" href="/cart" title="Carrinho">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                    Carrinho
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Sair</a>
+                            </li>
+
+                        </ul>
+
+                    {% else %}
+
+                        <ul class="navbar-nav me-auto mt-2">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/products">Produtos</a>
+                            </li>
+
+                        </ul>
+
+                        <ul class="navbar-nav ms-auto mt-2">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Cadastrar</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Entrar</a>
+                            </li>
+
+                        </ul>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <main class="container py-5">
+
+            {% block main %}{% endblock %}
+
+        </main>
+
+    </body>
+
+</html>

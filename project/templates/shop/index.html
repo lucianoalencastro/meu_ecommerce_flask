@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<div class="main-content">
+
+    <h1>Bem-vindo à Volt</h1>
+    <p>Tudo que você precisa, em um só lugar.</p>
+    <a href="/products" class="btn btn-primary">Ver produtos</a>
+
+    <div class="products-grid">
+        {% for product in products %}
+
+            <div class="card">
+                <a href="/product?id={{ product.id }}" class="product-img-link">
+                    <img src="{{ url_for('static', filename='images/' ~ product.image) }}" alt="{{ product.name }}">
+                </a>
+
+                <h5>{{ product.name }}</h5>
+
+                <p>{{ product.description }}</p>
+                <strong>R$ {{ product.price }}</strong>
+
+                <a href="/product?id={{ product.id }}">
+                    Ver produto
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

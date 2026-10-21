@@ -1,0 +1,180 @@
+/* Estilos Gerais da Página */
+body {
+    background-color: #f8f9fa; /* Um cinza bem claro para destacar os cards brancos */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Container alinhando a vitrine de produtos */
+/* Isso faz com que os seus cards fiquem lado a lado automaticamente */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Grade responsiva para os cards */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+/* Efeito de flutuação ao passar o mouse */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;         /* Define uma altura fixa padrão para todas as imagens */
+    object-fit: contain;   /* Garante que a imagem caiba inteira no espaço sem distorcer ou cortar */
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Detalhes do Texto do Produto */
+.card h5 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #212529;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    /* Limita o texto da descrição a 3 linhas para os cards não ficarem desalinhados */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card strong {
+    font-size: 1.25rem;
+    color: #2b2b2b;
+    display: block;
+    margin-bottom: 1.25rem;
+}
+
+/* Botão "Ver Produto" Customizado */
+.card a {
+    display: block;
+    text-align: center;
+    background-color: #212529;
+    color: #ffffff;
+    padding: 0.6rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+}
+
+.card a:hover {
+    background-color: #495057;
+    color: #ffffff;
+}
+
+.card a.product-img-link {
+    display: block;
+    background: transparent;
+    padding: 0;
+    border: none;
+    margin-bottom: 0;
+}
+
+.card a.product-img-link:hover {
+    background: transparent;
+}
+
+/* Estilização da Página de Detalhes do Produto */
+.product-detail {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    align-items: flex-start;
+}
+
+/* Caixa da imagem posicionada à esquerda com tamanho fixo */
+.product-image {
+    flex: 0 0 400px; /* Mantém a largura fixa de 400px */
+    max-width: 400px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 350px;       /* Altura fixa padrão para todas as fotos de detalhe */
+    object-fit: contain;   /* Preenche o espaço sem distorcer proporcionalmente */
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.product-info {
+    flex: 1;
+}
+/* Estilos da Lupa de Zoom */
+.product-image {
+    position: relative;
+    cursor: crosshair;
+}
+
+.zoom-lens {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    width: 100px;  /* Tamanho da lente */
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: none; /* Oculta por padrão */
+    pointer-events: none; /* Garante que o mouse interaja com a imagem de baixo */
+}
+
+/* Estilo para o container da imagem ampliada */
+.zoom-result {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    width: 400px;  /* Largura do painel de zoom */
+    height: 400px; /* Altura do painel de zoom */
+    display: none; /* Oculta por padrão */
+
+    /* Posiciona à direita da imagem principal */
+    top: 0;
+    left: 105%; /* Pequeno espaço entre a imagem e o zoom */
+    z-index: 100; /* Garante que fique por cima de tudo */
+    background-color: white; /* Fundo branco caso a imagem demore a carregar */
+
+    /* Garante que o fundo não repita e centralize a imagem ampliada */
+    background-repeat: no-repeat;
+    /* object-fit não funciona em background-image, usamos background-size no JS */
+}

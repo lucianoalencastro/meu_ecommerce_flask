@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Entrar
+{% endblock %}
+
+{% block main %}
+    <div class="main-content" style="max-width: 450px; margin-top: 4rem;">
+        <div style="background-color: #ffffff; padding: 2.5rem; border-radius: 12px; border: 1px solid #e9ecef; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);">
+            <h1 style="font-size: 2rem; margin-top: 0; text-align: center; margin-bottom: 0.5rem;">Entrar</h1>
+            <p style="text-align: center; margin-bottom: 2rem;">Acesse sua conta para ver seu carrinho e pedidos.</p>
+
+            <form action="/login" method="post">
+                <div class="mb-3" style="margin-bottom: 1.25rem;">
+                    <label for="username" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #212529;">Usuário</label>
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-100" id="username" name="username" placeholder="Digite seu usuário" type="text" style="padding: 0.75rem; border: 1px solid #ced4da; border-radius: 6px; width: 100%; box-sizing: border-box;" required>
+                </div>
+
+                <div class="mb-3" style="margin-bottom: 1.5rem;">
+                    <label for="password" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #212529;">Senha</label>
+                    <input class="form-control mx-auto w-100" id="password" name="password" placeholder="Digite sua senha" type="password" style="padding: 0.75rem; border: 1px solid #ced4da; border-radius: 6px; width: 100%; box-sizing: border-box;" required>
+                </div>
+
+                <button class="btn btn-primary" type="submit" style="width: 100%; padding: 0.75rem; background-color: #212529; color: #ffffff; border: none; border-radius: 6px; font-weight: 500; font-size: 1rem; cursor: pointer; transition: background-color 0.2s ease;">Entrar</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <p style="font-size: 0.95rem; margin: 0;">Ainda não tem uma conta? <a href="/register" style="color: #0d6efd; text-decoration: none; font-weight: 500;">Cadastre-se</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
