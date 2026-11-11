@@ -1,5 +1,12 @@
 # 🛒 Meu E-commerce Flask — Projeto Final CS50
 
+![Python](https://shields.io)
+![Flask](https://shields.io)
+![SQLite](https://shields.io)
+![Bootstrap](https://shields.io)
+![JavaScript](https://shields.io)
+![CS50x](https://shields.io)
+
 Este repositório contém o desenvolvimento do meu projeto final para a certificação do **CS50 (Harvard)**. Trata-se de uma aplicação de e-commerce completa construída em Python com o framework Flask, utilizando SQLite como banco de dados.
 
 ## 🎯 Objetivo do Repositório (Foco em Portfólio)
@@ -7,26 +14,23 @@ Mais do que apenas entregar os requisitos acadêmicos do curso, utilizei este pr
 
 ---
 
-## 🏗️ Evolução da Arquitetura
+## 🧠 Decisões Técnicas e Evolução da Arquitetura
 
-### 🧬 Fase 1: O "Código Legado" (Monólito Tradicional)
-Inicialmente, o projeto concentrava toda a sua lógica de funcionamento dentro do arquivo principal `app.py`. As rotas da web eram responsáveis por:
-- Capturar requisições HTTP.
-- Executar queries diretas de banco de dados (`INSERT`, `UPDATE`, `DELETE`).
-- Validar regras de negócio críticas (como checagem e subtração de estoque de produtos).
+### ✅ Arquitetura Atual: Monólito Funcional (Entrega Oficial CS50x)
+Para a entrega inicial, optei por uma arquitetura monolítica bem estruturada, priorizando a entrega de valor ponta a ponta e a integridade relacional:
+- **Centralização e Fluxo:** Gerenciamento de rotas HTTP, autenticação com hashing de senhas (`Werkzeug`) e controle de sessões no servidor (`Flask-Session`) concentrados no `app.py`.
+- **Persistência Relacional:** Modelagem normalizada em **SQLite** (`schema.sql`), garantindo o relacionamento correto entre usuários, catálogo, itens do carrinho e histórico de pedidos, com baixa dinâmica de estoque no checkout.
+- **Reutilização (DRY):** Criação de decoradores e funções utilitárias isoladas em `helpers.py` para proteção de rotas (`@login_required`).
 
-*Embora funcional, essa abordagem violava princípios de design de código, dificultando a manutenção e a criação de testes automatizados.*
+### 🚧 Próximas Decisões: Refatoração SOLID (Em andamento)
+Com o sistema validado, o próximo ciclo de commits foca em reduzir o acoplamento e aumentar a testabilidade do código:
+- [ ] **S (Single Responsibility Principle):** Extrair as regras de negócio de estoque, carrinho e checkout do `app.py` para uma camada especialista (`services.py`), deixando o arquivo principal responsável estritamente pelo roteamento HTTP.
+- [ ] **D (Dependency Inversion Principle):** Injetar a conexão do banco de dados dinamicamente nas classes de serviço (`__init__`), desacoplando a regra de negócio do SQLite.
 
-### 🛠️ Fase 2: Refatoração com Princípios SOLID
-Para profissionalizar o projeto, separei as responsabilidades do sistema aplicando conceitos do **SOLID**:
-- **S (Single Responsibility Principle):** O arquivo `app.py` passou a atuar estritamente como a *Camada de Apresentação* (gerenciando rotas e renderizando templates). Toda a lógica pesada de estoque e carrinho foi movida para classes especialistas em um novo arquivo: `services.py` (*Camada de Negócio*).
-- **D (Dependency Inversion Principle):** As classes de serviço não criam ou importam diretamente o banco de dados. A conexão do banco é **injetada** dinamicamente através do construtor (`__init__`). Isso permite alterar a tecnologia do banco (ex: migrar de SQLite para PostgreSQL ou MySQL) alterando apenas 3 linhas no arquivo principal, sem tocar na regra de negócios.
-
-### 🔒 Fase 3: Introdução de Idempotência com UUID
-Em sistemas de e-commerce reais, cliques duplos acidentais no botão de compra podem gerar cobranças duplicadas ou falhas de estoque. 
-- Implementei um mecanismo de **Idempotência** no fluxo de checkout.
-- Cada tentativa de compra gera um token exclusivo universal (**UUID v4**).
-- A camada de serviço intercepta requisições repetidas com o mesmo token, bloqueando processamentos duplicados e garantindo a segurança financeira da operação.
+### 🚧 Próximas Decisões: Resiliência e Idempotência (Planejada)
+Para blindar o fluxo financeiro contra falhas de rede ou cliques duplos acidentais no botão de finalização de compra:
+- [ ] Implementar geração de tokens exclusivos universais (**UUID v4**) para cada intenção de checkout.
+- [ ] Interceptar requisições duplicadas com o mesmo token na camada de serviço, garantindo consistência transacional.
 
 ---
 
@@ -123,4 +127,4 @@ Abra o seu navegador e acesse: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 ---
 
 ## ⚖️ Licença
-Este projeto está licensed sob a **MIT License** — sinta-se à vontade para estudar, clonar e utilizar o código conforme as diretrizes da licença.
+Este projeto está licenciado sob a **MIT License** — sinta-se à vontade para estudar, clonar e utilizar o código conforme as diretrizes da licença.
