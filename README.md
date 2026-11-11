@@ -1,12 +1,5 @@
 # 🛒 Meu E-commerce Flask — Projeto Final CS50
 
-![Python](https://shields.io)
-![Flask](https://shields.io)
-![SQLite](https://shields.io)
-![Bootstrap](https://shields.io)
-![JavaScript](https://shields.io)
-![CS50x](https://shields.io)
-
 Este repositório contém o desenvolvimento do meu projeto final para a certificação do **CS50 (Harvard)**. Trata-se de uma aplicação de e-commerce completa construída em Python com o framework Flask, utilizando SQLite como banco de dados.
 
 ## 🎯 Objetivo do Repositório (Foco em Portfólio)
