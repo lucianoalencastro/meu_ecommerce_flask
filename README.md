@@ -12,8 +12,9 @@ Mais do que apenas entregar os requisitos acadêmicos do curso, utilizei este pr
 ### ✅ Arquitetura Atual: Monólito Funcional (Entrega Oficial CS50x)
 Para a entrega inicial, optei por uma arquitetura monolítica bem estruturada, priorizando a entrega de valor ponta a ponta e a integridade relacional:
 - **Centralização e Fluxo:** Gerenciamento de rotas HTTP, autenticação com hashing de senhas (`Werkzeug`) e controle de sessões no servidor (`Flask-Session`) concentrados no `app.py`.
-- **Persistência Relacional:** Modelagem normalizada em **SQLite** (`schema.sql`), garantindo o relacionamento correto entre usuários, catálogo, itens do carrinho e histórico de pedidos, com baixa dinâmica de estoque no checkout.
+- **Persistência Relacional:** Modelagem normalizada em **SQLite** (`ecommerce.db`), garantindo o relacionamento correto entre usuários, catálogo, itens do carrinho e histórico de pedidos, com baixa dinâmica de estoque no checkout.
 - **Reutilização (DRY):** Criação de decoradores e funções utilitárias isoladas em `helpers.py` para proteção de rotas (`@login_required`).
+- **Componentização Visual (Jinja2):** Uso de herança de templates (`layout.html`) para centralizar a barra de navegação, rodapé e importações do Bootstrap 5, eliminando repetição de código HTML entre as páginas.
 
 ### 🚧 Próximas Decisões: Refatoração SOLID (Em andamento)
 Com o sistema validado, o próximo ciclo de commits foca em reduzir o acoplamento e aumentar a testabilidade do código:
@@ -24,6 +25,12 @@ Com o sistema validado, o próximo ciclo de commits foca em reduzir o acoplament
 Para blindar o fluxo financeiro contra falhas de rede ou cliques duplos acidentais no botão de finalização de compra:
 - [ ] Implementar geração de tokens exclusivos universais (**UUID v4**) para cada intenção de checkout.
 - [ ] Interceptar requisições duplicadas com o mesmo token na camada de serviço, garantindo consistência transacional.
+
+### 🚧 Próximas Decisões: Novas Funcionalidades de Negócio e IA (Planejada)
+Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
+- [ ] **Painel Administrativo (RBAC):** Criação de área restrita para administradores gerenciarem produtos, preços e reposição de estoque.
+- [ ] **Busca Dinâmica:** Implementação de barra de pesquisa com filtros otimizados no catálogo.
+- [ ] **Categorização Inteligente com IA:** Integração com API de Inteligência Artificial para sugerir e atribuir categorias automaticamente no cadastro de novos produtos.
 
 ---
 
@@ -77,8 +84,8 @@ Para blindar o fluxo financeiro contra falhas de rede ou cliques duplos acidenta
 - **Flask** (Framework Web e gerenciamento de sessões)
 - **CS50 SQL Library** (Interface de comunicação com o banco de dados)
 - **SQLite** (Persistência de dados local)
-- **HTML5 / CSS3 / JavaScript** (Interface do usuário)
-- **UUID** (Geração de tokens de idempotência aleatórios)
+- **Jinja2 / HTML5 / CSS3 / Bootstrap 5 & JavaScript** (Interface do usuário)
+- **UUID** (Geração de tokens de idempotência aleatórios - *Planejado*)
 
 ---
 
