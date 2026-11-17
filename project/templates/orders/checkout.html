@@ -11,6 +11,8 @@
 
         {% if cart %}
             <form action="/checkout" method="post">
+                <input type="hidden" name="idempotency_token" value="{{ idempotency_token }}">
+                
                 <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
 
                     <!-- Coluna da Esquerda: Formulário de Endereço / Dados -->

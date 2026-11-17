@@ -1,3 +1,4 @@
+import uuid
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
@@ -158,6 +159,14 @@ def checkout():
 
         return redirect("/orders")
 
+    summary = checkout_service.get_checkout_summary(session["user_id"])
+    idempotency_token = str(uuid.uuid4())
+    return render_template(
+        "orders/checkout.html",
+        cart=summary["items"],
+        subtotal=summary["subtotal"],
+        idempotency_token=idempotency_token
+    )
 
 
 @app.route("/orders")
