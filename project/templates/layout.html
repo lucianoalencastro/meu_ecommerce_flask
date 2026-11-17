@@ -68,14 +68,22 @@
 
                         <ul class="navbar-nav ms-auto mt-2 align-items-center">
 
-                            <li class="nav-item me-3">
+                           <li class="nav-item me-3">
                                 <a class="nav-link d-flex align-items-center" href="/cart" title="Carrinho">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16" style="margin-right: 4px;">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                    </svg>
+                                    <div class="position-relative d-inline-flex align-items-center" style="margin-right: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </svg>
+                                        {% if cart_count > 0 %}
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                                                {{ cart_count }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
                                     Carrinho
                                 </a>
-                            </li>
+                           </li>
+
 
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Sair</a>
@@ -149,7 +157,7 @@
                     <!-- Coluna 3: Atendimento / Segurança -->
                     <div style="flex: 1; min-width: 200px;">
                         <h5 style="color: #212529; font-size: 0.95rem; font-weight: 600; margin-top: 0; margin-bottom: 0.75rem;">Atendimento</h5>
-                        <p style="font-size: 0.9rem; margin: 0 0 0.5rem;">contato@minhaloja.com.br</p>
+                        <p style="font-size: 0.9rem; margin: 0 0 0.5rem;">contato@volt.com.br</p>
                         <p style="font-size: 0.85rem; color: #198754; font-weight: 500; margin: 0;">Ambiente Seguro (SSL)</p>
                     </div>
 

@@ -134,6 +134,13 @@ def add_to_cart():
 
     return redirect("/cart")
 
+@app.context_processor
+def inject_cart_count():
+    if "user_id" in session:
+        count = cart_service.get_cart_count(session["user_id"])
+        return {"cart_count": count}
+    return {"cart_count": 0}
+
 
 @app.route("/remove_from_cart", methods=["POST"])
 @login_required

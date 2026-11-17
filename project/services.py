@@ -86,6 +86,12 @@ class CartService:
     def get_user_cart(self, user_id):
         return self.cart_repo.get_full_cart_by_user(user_id)
 
+    def get_cart_count(self, user_id):
+        if not user_id:
+            return 0
+        return self.cart_repo.get_total_items_count(user_id)
+
+
 
 class CheckoutService:
     def __init__(self, order_repo: OrderRepository, cart_repo: CartRepository):

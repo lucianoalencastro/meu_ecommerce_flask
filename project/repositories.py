@@ -97,6 +97,14 @@ class CartRepository:
     def clear_by_user(self, user_id):
         self.db.execute("DELETE FROM cart_items WHERE user_id = ?", user_id)
 
+    def get_total_items_count(self, user_id):
+        rows = self.db.execute(
+            "SELECT COALESCE(SUM(quantity), 0) AS total FROM cart_items WHERE user_id = ?",
+            user_id
+        )
+        return rows[0]["total"] if rows else 0
+
+
 
 class OrderRepository:
     def __init__(self, db):
