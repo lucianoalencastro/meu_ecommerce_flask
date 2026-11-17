@@ -35,6 +35,13 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+@app.context_processor
+def inject_cart_count():
+    if "user_id" in session:
+        count = cart_service.get_cart_count(session["user_id"])
+        return {"cart_count": count}
+    return {"cart_count": 0}
+
 
 # --- ROTAS DE PRODUTOS ---
 
@@ -133,13 +140,6 @@ def add_to_cart():
         return result["message"], result["status"]
 
     return redirect("/cart")
-
-@app.context_processor
-def inject_cart_count():
-    if "user_id" in session:
-        count = cart_service.get_cart_count(session["user_id"])
-        return {"cart_count": count}
-    return {"cart_count": 0}
 
 
 @app.route("/remove_from_cart", methods=["POST"])
