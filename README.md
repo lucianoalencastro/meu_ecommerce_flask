@@ -3,31 +3,32 @@
 Este repositório contém o desenvolvimento do meu projeto final para a certificação do **CS50 (Harvard)**. Trata-se de uma aplicação de e-commerce completa construída em Python com o framework Flask, utilizando SQLite como banco de dados.
 
 ## 🎯 Objetivo do Repositório (Foco em Portfólio)
-Mais do que apenas entregar os requisitos acadêmicos do curso, utilizei este projeto para demonstrar minha evolução técnica em **Engenharia de Software**. O histórico de commits deste repositório documenta a transição de uma arquitetura monolítica tradicional e acoplada para um design limpo, seguro e modular, aplicando padrões de mercado.
+Mais do que apenas entregar os requisitos acadêmicos do curso, utilizei este projeto para demonstrar minha evolução técnica em **Engenharia de Software**. O histórico de commits deste repositório documenta a transição de uma arquitetura monolítica tradicional para uma **Arquitetura em Camadas (Controllers, Services e Repositories)** limpa, segura e modular, aplicando padrões de mercado.
 
 ---
 
 ## 🧠 Decisões Técnicas e Evolução da Arquitetura
 
-### ✅ Arquitetura Atual: Monólito Funcional (Entrega Oficial CS50x)
-Para a entrega inicial, optei por uma arquitetura monolítica bem estruturada, priorizando a entrega de valor ponta a ponta e a integridade relacional:
-- **Centralização e Fluxo:** Gerenciamento de rotas HTTP, autenticação com hashing de senhas (`Werkzeug`) e controle de sessões no servidor (`Flask-Session`) concentrados no `app.py`.
-- **Persistência Relacional:** Modelagem normalizada em **SQLite** (`ecommerce.db`), garantindo o relacionamento correto entre usuários, catálogo, itens do carrinho e histórico de pedidos, com baixa dinâmica de estoque no checkout.
-- **Reutilização (DRY):** Criação de decoradores e funções utilitárias isoladas em `helpers.py` para proteção de rotas (`@login_required`).
-- **Componentização Visual (Jinja2):** Uso de herança de templates (`layout.html`) para centralizar a barra de navegação, rodapé e importações do Bootstrap 5, eliminando repetição de código HTML entre as páginas.
+### ✅ Etapa 1: Monólito Funcional (Entrega Oficial CS50x)
+Para a entrega inicial, construí uma base monolítica funcional priorizando a entrega de valor ponta a ponta e a integridade relacional:
+- **Centralização e Fluxo:** Gerenciamento de rotas HTTP, autenticação com hashing de senhas (`Werkzeug`) e controle de sessões no servidor (`Flask-Session`).
+- **Persistência Relacional:** Modelagem normalizada em **SQLite** (`ecommerce.db`), garantindo o relacionamento correto entre usuários, catálogo, itens do carrinho e histórico de pedidos, com baixa dinâmica de estoque.
+- **Reutilização (DRY) e Componentização (Jinja2):** Criação de decoradores isolados (`@login_required` em `helpers.py`) e herança de templates (`layout.html`) com Bootstrap 5, rodapé responsivo e contador dinâmico de itens no carrinho via `context_processor`.
 
-### 🚧 Próximas Decisões: Refatoração SOLID (Em andamento)
-Com o sistema validado, o próximo ciclo de commits foca em reduzir o acoplamento e aumentar a testabilidade do código:
-- [ ] **S (Single Responsibility Principle):** Extrair as regras de negócio de estoque, carrinho e checkout do `app.py` para uma camada especialista (`services.py`), deixando o arquivo principal responsável estritamente pelo roteamento HTTP.
-- [ ] **D (Dependency Inversion Principle):** Injetar a conexão do banco de dados dinamicamente nas classes de serviço (`__init__`), desacoplando a regra de negócio do SQLite.
+### ✅ Etapa 2: Arquitetura em Camadas & Princípios SOLID (Concluída)
+O código foi totalmente refatorado para eliminar consultas SQL das rotas e separar responsabilidades:
+- [x] **S (Single Responsibility Principle):** Separação estrita entre apresentação (`app.py`), regras de negócio (`services.py`) e acesso a dados (`repositories.py`).
+- [x] **D (Dependency Inversion Principle):** Injeção de dependências (`db` nos repositórios e repositórios nos serviços via `__init__`), desacoplando a regra de negócio da tecnologia de banco de dados.
+- [x] **Repository Pattern:** Isolamento de todas as queries SQL em `ProductRepository`, `CartRepository`, `OrderRepository` e `UserRepository`.
 
-### 🚧 Próximas Decisões: Resiliência e Idempotência (Planejada)
+### ✅ Etapa 3: Resiliência e Idempotência no Checkout (Concluída)
 Para blindar o fluxo financeiro contra falhas de rede ou cliques duplos acidentais no botão de finalização de compra:
-- [ ] Implementar geração de tokens exclusivos universais (**UUID v4**) para cada intenção de checkout.
-- [ ] Interceptar requisições duplicadas com o mesmo token na camada de serviço, garantindo consistência transacional.
+- [x] Geração de tokens exclusivos universais (**UUID v4**) a cada sessão de checkout (`GET /checkout`).
+- [x] Interceptação de requisições duplicadas com o mesmo `idempotency_token` na camada `CheckoutService` com restrição `UNIQUE` no banco de dados, impedindo pedidos duplicados.
 
 ### 🚧 Próximas Decisões: Novas Funcionalidades de Negócio e IA (Planejada)
 Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
+- [ ] **Migração para PostgreSQL:** Adaptação da camada de persistência para banco de dados em produção.
 - [ ] **Painel Administrativo (RBAC):** Criação de área restrita para administradores gerenciarem produtos, preços e reposição de estoque.
 - [ ] **Busca Dinâmica:** Implementação de barra de pesquisa com filtros otimizados no catálogo.
 - [ ] **Categorização Inteligente com IA:** Integração com API de Inteligência Artificial para sugerir e atribuir categorias automaticamente no cadastro de novos produtos.
@@ -37,16 +38,19 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 ## 📁 Estrutura do Projeto
 
 ```text
-├── project/           # Diretório principal da aplicação
-│   ├── app.py         # Camada de Apresentação (Rotas Flask)
-│   ├── services.py    # Camada de Negócio (Serviços e regras)
-│   ├── templates/     # Páginas HTML (Renderizadas via Jinja2)
-│   ├── static/        # Arquivos estáticos (CSS, JS, Imagens)
-│   └── ecommerce.db   # Banco de dados relacional SQLite
-├── .gitattributes     # Configurações de atributos do Git
-├── .gitignore         # Arquivos e pastas ignorados no versionamento
-├── LICENSE            # Termos da Licença MIT
-└── README.md          # Documentação do sistema
+├── project/             # Diretório principal da aplicação
+│   ├── app.py           # Camada de Apresentação (Rotas Flask e Context Processors)
+│   ├── services.py      # Camada de Negócio (Regras, validações e idempotência)
+│   ├── repositories.py  # Camada de Dados (Consultas SQL isoladas)
+│   ├── helpers.py       # Decoradores e funções auxiliares (@login_required)
+│   ├── templates/       # Páginas HTML (Renderizadas via Jinja2)
+│   ├── static/          # Arquivos estáticos (CSS, JS, Imagens)
+│   └── ecommerce.db     # Banco de dados relacional SQLite
+├── .gitattributes       # Configurações de atributos do Git
+├── .gitignore           # Arquivos e pastas ignorados no versionamento
+├── LICENSE              # Termos da Licença MIT
+├── requirements.txt     # Dependências do projeto Python
+└── README.md            # Documentação do sistema
 ```
 
 ---
@@ -61,31 +65,34 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 | `GET/POST` | `/login` | Autenticação de usuários com criação de sessão segura. |
 | `GET` | `/logout` | Encerramento da sessão ativa do usuário. |
 
-### Catálogo e Compras
+### Catálogo e Carrinho
 
 | Método | Rota | Descrição | Regra Especial |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/` | Vitrine principal com listagem de produtos. | Acesso público |
-| `GET` | `/produto/<int:id>` | Detalhes de um produto específico e verificação de estoque. | Acesso público |
-| `GET/POST` | `/carrinho` | Adicionar, remover ou atualizar a quantidade de itens. | Requer login |
+| `GET` | `/` | Vitrine principal com produtos em destaque. | Acesso público |
+| `GET` | `/products` | Listagem completa do catálogo de produtos. | Acesso público |
+| `GET` | `/product?id=<id>` | Detalhes de um produto específico e estoque disponível. | Acesso público |
+| `GET` | `/cart` | Visualização dos itens adicionados ao carrinho. | Requer login |
+| `POST` | `/add_to_cart` | Adiciona itens ao carrinho e reserva estoque. | Requer login |
+| `POST` | `/remove_from_cart` | Remove unidades do carrinho e devolve ao estoque. | Requer login |
 
 ### Checkout e Resiliência
 
 | Método | Rota | Descrição | Regra Especial |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/checkout` | Exibição do resumo do pedido antes do fechamento. | Requer login |
-| `POST` | `/checkout/process` | Processamento final do pagamento e baixa definitiva de estoque. | **Requer Token UUID (Idempotência)** |
-| `GET` | `/pedidos` | Histórico de compras concluídas pelo usuário logado. | Requer login |
+| `GET` | `/checkout` | Exibição do resumo do pedido e geração do Token UUID. | Requer login |
+| `POST` | `/checkout` | Processamento do pedido, criação de itens e limpeza do carrinho. | **Requer Token UUID (Idempotência)** |
+| `GET` | `/orders` | Histórico de compras concluídas pelo usuário logado. | Requer login |
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
-- **Python** (Lógica do backend)
-- **Flask** (Framework Web e gerenciamento de sessões)
-- **CS50 SQL Library** (Interface de comunicação com o banco de dados)
-- **SQLite** (Persistência de dados local)
-- **Jinja2 / HTML5 / CSS3 / Bootstrap 5 & JavaScript** (Interface do usuário)
-- **UUID** (Geração de tokens de idempotência aleatórios - *Planejado*)
+- **Python 3** (Lógica do backend e arquitetura em camadas)
+- **Flask** (Framework Web, gerenciamento de sessões e context processors)
+- **CS50 SQL Library** (Interface de comunicação parametrizada com o banco)
+- **SQLite** (Persistência de dados relacional local)
+- **Jinja2 / HTML5 / CSS3 / Bootstrap 5 & JavaScript** (Interface responsiva)
+- **UUID (v4)** (Geração de tokens de idempotência no checkout)
 
 ---
 
@@ -119,7 +126,8 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 
 4. **Inicie o servidor a partir do diretório do projeto:**
    ```bash
-   flask --app project/app run
+   cd project
+   flask run
    ```
 
 Abra o seu navegador e acesse: [http://127.0.0.1:5000](http://127.0.0.1:5000)
