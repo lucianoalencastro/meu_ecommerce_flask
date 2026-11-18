@@ -131,47 +131,49 @@
 
         </main>
 
-        <footer style="background-color: #f8f9fa; border-top: 1px solid #e9ecef; margin-top: 4rem; padding: 3rem 1rem 1.5rem; color: #6c757d;">
-            <div style="max-width: 1100px; margin: 0 auto;">
-                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; margin-bottom: 2rem;">
+        <footer class="bg-light border-top mt-5 pt-5 pb-4 text-muted">
+            <div class="container">
+                <div class="row gy-4 mb-4">
 
                     <!-- Coluna 1: Marca e Descrição -->
-                    <div style="flex: 2; min-width: 240px;">
-                        <h4 style="color: #212529; font-size: 1.15rem; font-weight: 700; margin-top: 0; margin-bottom: 0.75rem;">Volt</h4>
-                        <p style="font-size: 0.9rem; line-height: 1.5; margin: 0;">
+                    <div class="col-md-5">
+                        <h5 class="text-dark fw-bold mb-3">Volt</h5>
+                        <p class="small mb-0">
                             Produtos selecionados com qualidade, entrega rápida e compra 100% segura.
                         </p>
                     </div>
 
                     <!-- Coluna 2: Links Rápidos -->
-                    <div style="flex: 1; min-width: 150px;">
-                        <h5 style="color: #212529; font-size: 0.95rem; font-weight: 600; margin-top: 0; margin-bottom: 0.75rem;">Navegação</h5>
-                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <li><a href="/" style="color: #6c757d; text-decoration: none;">Início</a></li>
-                            <li><a href="/products" style="color: #6c757d; text-decoration: none;">Produtos</a></li>
-                            <li><a href="/cart" style="color: #6c757d; text-decoration: none;">Carrinho</a></li>
-                            <li><a href="/orders" style="color: #6c757d; text-decoration: none;">Meus Pedidos</a></li>
+                    <div class="col-md-3 offset-md-1">
+                        <h6 class="text-dark fw-semibold mb-3">Navegação</h6>
+                        <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                            <li><a href="/" class="text-muted text-decoration-none">Início</a></li>
+                            <li><a href="/products" class="text-muted text-decoration-none">Produtos</a></li>
+                            <li><a href="/cart" class="text-muted text-decoration-none">Carrinho</a></li>
+                            <li><a href="/orders" class="text-muted text-decoration-none">Meus Pedidos</a></li>
                         </ul>
                     </div>
 
                     <!-- Coluna 3: Atendimento / Segurança -->
-                    <div style="flex: 1; min-width: 200px;">
-                        <h5 style="color: #212529; font-size: 0.95rem; font-weight: 600; margin-top: 0; margin-bottom: 0.75rem;">Atendimento</h5>
-                        <p style="font-size: 0.9rem; margin: 0 0 0.5rem;">contato@volt.com.br</p>
-                        <p style="font-size: 0.85rem; color: #198754; font-weight: 500; margin: 0;">Ambiente Seguro (SSL)</p>
+                    <div class="col-md-3">
+                        <h6 class="text-dark fw-semibold mb-3">Atendimento</h6>
+                        <p class="small mb-1">contato@volt.com.br</p>
+                        <p class="small text-success fw-medium mb-0">Ambiente Seguro (SSL)</p>
                     </div>
 
                 </div>
 
-                <hr style="border: none; border-top: 1px solid #dee2e6; margin: 1.5rem 0;">
+                <hr class="my-4">
 
                 <!-- Barra Inferior: Direitos Autorais -->
-                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.85rem;">
-                    <span>&copy; 2026 <strong>Volt</strong>. Todos os direitos reservados.</span>
-                    <span>Desenvolvido com Python &amp; Flask</span>
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 small">
+                    <span>&copy; 2026 <strong class="text-dark">Volt</strong>. Todos os direitos reservados.</span>
+                    <span>Desenvolvido por <strong class="text-dark">Luciano Garcia</strong> com Python, Flask &amp; Bootstrap</span>
                 </div>
+
             </div>
         </footer>
+
 
 
     </body>
