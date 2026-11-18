@@ -1,13 +1,13 @@
-# 🛒 Meu E-commerce Flask — Projeto Final CS50
+# Meu E-commerce Flask — Projeto Final CS50
 
 Este repositório contém o desenvolvimento do meu projeto final para a certificação do **CS50 (Harvard)**. Trata-se de uma aplicação de e-commerce completa construída em Python com o framework Flask, utilizando SQLite como banco de dados.
 
-## 🎯 Objetivo do Repositório (Foco em Portfólio)
+## Objetivo do Repositório (Foco em Portfólio)
 Mais do que apenas entregar os requisitos acadêmicos do curso, utilizei este projeto para demonstrar minha evolução técnica em **Engenharia de Software**. O histórico de commits deste repositório documenta a transição de uma arquitetura monolítica tradicional para uma **Arquitetura em Camadas (Controllers, Services e Repositories)** limpa, segura e modular, aplicando padrões de mercado.
 
 ---
 
-## 🧠 Decisões Técnicas e Evolução da Arquitetura
+## Decisões Técnicas e Evolução da Arquitetura
 
 ### ✅ Etapa 1: Monólito Funcional (Entrega Oficial CS50x)
 Para a entrega inicial, construí uma base monolítica funcional priorizando a entrega de valor ponta a ponta e a integridade relacional:
@@ -55,7 +55,7 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 
 ---
 
-## 🛣️ Rotas da Aplicação
+## Rotas da Aplicação
 
 ### Autenticação
 
@@ -86,7 +86,7 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 - **Python 3** (Lógica do backend e arquitetura em camadas)
 - **Flask** (Framework Web, gerenciamento de sessões e context processors)
 - **CS50 SQL Library** (Interface de comunicação parametrizada com o banco)
@@ -96,7 +96,7 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 
 ---
 
-## 🛠️ Como Executar o Projeto
+## Como Executar o Projeto
 
 ### Pré-requisitos
 * Python 3.10 ou superior instalado.
