@@ -1,4 +1,4 @@
-# Meu E-commerce Flask — Projeto Final CS50
+# (Volt) E-commerce Flask — Projeto Final CS50
 
 Este repositório contém o desenvolvimento do meu projeto final para a certificação do **CS50 (Harvard)**. Trata-se de uma aplicação de e-commerce completa construída em Python com o framework Flask, utilizando SQLite como banco de dados.
 
