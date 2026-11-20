@@ -5,8 +5,6 @@ Este repositório contém o desenvolvimento do meu projeto final para a certific
 ## Objetivo do Repositório (Foco em Portfólio)
 Mais do que apenas entregar os requisitos acadêmicos do curso, utilizei este projeto para demonstrar minha evolução técnica em **Engenharia de Software**. O histórico de commits deste repositório documenta a transição de uma arquitetura monolítica tradicional para uma **Arquitetura em Camadas (Controllers, Services e Repositories)** limpa, segura e modular, aplicando padrões de mercado.
 
----
-
 ## Decisões Técnicas e Evolução da Arquitetura
 
 ### ✅ Etapa 1: Monólito Funcional (Entrega Oficial CS50x)
@@ -33,8 +31,6 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 - [ ] **Busca Dinâmica:** Implementação de barra de pesquisa com filtros otimizados no catálogo.
 - [ ] **Categorização Inteligente com IA:** Integração com API de Inteligência Artificial para sugerir e atribuir categorias automaticamente no cadastro de novos produtos.
 
----
-
 ## 📁 Estrutura do Projeto
 
 ```text
@@ -52,8 +48,6 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 ├── requirements.txt     # Dependências do projeto Python
 └── README.md            # Documentação do sistema
 ```
-
----
 
 ## Rotas da Aplicação
 
@@ -84,7 +78,6 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 | `POST` | `/checkout` | Processamento do pedido, criação de itens e limpeza do carrinho. | **Requer Token UUID (Idempotência)** |
 | `GET` | `/orders` | Histórico de compras concluídas pelo usuário logado. | Requer login |
 
----
 
 ## Tecnologias Utilizadas
 - **Python 3** (Lógica do backend e arquitetura em camadas)
@@ -94,7 +87,6 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 - **Jinja2 / HTML5 / CSS3 / Bootstrap 5 & JavaScript** (Interface responsiva)
 - **UUID (v4)** (Geração de tokens de idempotência no checkout)
 
----
 
 ## Como Executar o Projeto
 
@@ -132,7 +124,6 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 
 Abra o seu navegador e acesse: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
----
 
 ## ⚖️ Licença
 Este projeto está licenciado sob a **MIT License** — sinta-se à vontade para estudar, clonar e utilizar o código conforme as diretrizes da licença.
