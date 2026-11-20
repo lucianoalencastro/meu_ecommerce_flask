@@ -98,7 +98,7 @@ Para expandir o ecossistema da loja e automatizar a gestão do catálogo:
 
 1. **Clone este repositório:**
    ```bash
-   git clone https://github.com/lucianoalencastro/meu_ecommerce_flask.git
+   git clone https://github.com/lucianoalencastro/volt_ecommerce_flask.git
    cd meu_ecommerce_flask
    ```
 
